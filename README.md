@@ -12,7 +12,7 @@ Rem is a voice, memory, and personality-based AI personal assistant. compared to
 <br>
 
 
-This project blends PyTorch, Coqui TTS, SpeechRecognition, and custom intent datasets to create a next-gen conversational experience.
+This project combines PyTorch, Coqui TTS, SpeechRecognition, and Discords Application API to create a next generation conversational experience.
 
 **Dataset Format**
 
