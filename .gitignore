@@ -1,7 +1,7 @@
 venv/
 audio/
 etc/
-components/hidden.py
 __pycache__/
 data/
 .DS_Store
+*.pth

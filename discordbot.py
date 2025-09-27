@@ -5,9 +5,9 @@ import os
 from dotenv import load_dotenv
 from .model.response import generate_reply
 
+# Enviorment Variables
 ENV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'model', 'data', '.env'))
 load_dotenv(ENV_PATH)
-
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 def is_clean(text):
@@ -15,9 +15,7 @@ def is_clean(text):
     words = set(cleaned.split())
     if words:
         return False
-    if re.search(r'<a?:\w+:\d+>', text):  # Discord custom emoji
-        return False
-    if re.search(r'[\U00010000-\U0010ffff]', text):  # Unicode emoji
+    if re.search(r'<a?:\w+:\d+>', text) or  re.search(r'[\U00010000-\U0010ffff]', text):  # Discord or Unicode Emojis
         return False
     return True
 

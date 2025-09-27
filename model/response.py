@@ -1,7 +1,7 @@
-import torch
-import pickle
 import os
 import re    
+import torch
+import pickle
 from .train import Encoder, Decoder
 from .utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE
 
@@ -38,10 +38,10 @@ def generate_reply(input_sentence):
         result = []
         for _ in range(MAX_LENGTH):
             output, hidden = decoder(tgt_input, hidden)
-            top1 = output.argmax(2)[-1]
+            top1 = output.argmax(2)[-1] # Get the index of the highest probability word
             if top1.item() == 2:
                 break
             result.append(top1.item())
-            tgt_input = top1.unsqueeze(0)
+            tgt_input = top1.unsqueeze(0) # Prevents Shape Mismatch
 
         return vocab.indices_to_sentence(result)
