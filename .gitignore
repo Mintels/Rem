@@ -4,4 +4,3 @@ etc/
 __pycache__/
 data/
 .DS_Store
-*.pth

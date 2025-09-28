@@ -5,7 +5,7 @@ BATCH_SIZE = 32 # Feeds the model {BATCH_SIZE} sentences at a time.
 HIDDEN_SIZE = 256
 NUM_EPOCHS = 20 # Number of Training Rounds
 LEARNING_RATE = 0.001 # Experiment With This Value, Stability vs Speed
-MAX_LENGTH = 30 # Maximum Sentence Length
+MAX_LENGTH = 20 # Maximum Sentence Length
 
 # Tokenization and Learned Vocabulary.
 def tokenize(sentence):
