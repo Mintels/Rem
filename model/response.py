@@ -1,15 +1,17 @@
 import os
-import re    
 import torch
 import pickle
+from torch.serialization import add_safe_globals
 from .train import Encoder, Decoder
 from .utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE
+
 
 
 BASE_DIR = os.path.dirname(__file__)
 
 MODEL_FILE = os.path.join(BASE_DIR, "rem.pth")
 VOCAB_FILE = os.path.join(BASE_DIR, "data", "vocab.pkl")
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -28,7 +30,9 @@ decoder.load_state_dict(checkpoint["decoder"])
 encoder.eval()
 decoder.eval()
 
-def generate_reply(input_sentence):
+
+
+def generate_reply(input_sentence: str) -> str:
     with torch.no_grad():
         input_indices = [1] + vocab.sentence_to_indices(input_sentence.lower())[:MAX_LENGTH] + [2]
         input_tensor = torch.tensor(input_indices).unsqueeze(1).to(device)
@@ -38,10 +42,10 @@ def generate_reply(input_sentence):
         result = []
         for _ in range(MAX_LENGTH):
             output, hidden = decoder(tgt_input, hidden)
-            top1 = output.argmax(2)[-1] # Get the index of the highest probability word
-            if top1.item() == 2:
+            top1 = output.argmax(2)[-1]
+            if top1.item() == 2:  # EOS
                 break
             result.append(top1.item())
-            tgt_input = top1.unsqueeze(0) # Prevents Shape Mismatch
+            tgt_input = top1.unsqueeze(0)
 
         return vocab.indices_to_sentence(result)
