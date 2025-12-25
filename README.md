@@ -1,6 +1,6 @@
 # <img width="40" height="40" alt="logo" src="https://github.com/user-attachments/assets/2a66aef7-99d3-427d-ba25-2adb33dfb3f7" />  Rem: An AI Conversational Companion
 
-Rem is a voice, memory, and personality-based AI personal assistant. compared to conventional chatbots, Rem is an AI-powered assistant with the goal to feel more human. Rem, compared with conventional assistants, creates engaging, customized interactions by combining expressive voice synthesis, conversational memory, and natural language understanding.
+Rem is a voice, memory, and personality-based AI personal companion. compared to conventional chatbots, Rem is an AI-powered assistant with the goal to feel more human. Rem, compared with conventional assistants, creates engaging, customized interactions by combining expressive voice synthesis, conversational memory, and natural language understanding.
 
 ## Example Application
 <br>
