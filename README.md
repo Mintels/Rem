@@ -13,9 +13,9 @@ Rem is a voice, memory, and personality-based AI personal companion. compared to
 
 
 ## Tech Stack
-
 <a href=https://pytorch.org/>PyTorch</a></br> 
 <a href=https://pypi.org/project/TTS/>Coqui TTS</a></br>
+<a href=https://pypi.org/project/SpeechRecognition/>Speech Recognition</a></br>
 <a href="https://discord.com/developers/docs/reference">Discord</a></br>
 <a href="https://pypi.org/project/discord-ext-voice-recv/">Discord-Ext-Voice-Recv</a></br>
 
