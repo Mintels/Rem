@@ -28,16 +28,9 @@ TOKEN = os.getenv("REM_TOKEN")
 # Speech recognizer
 recognizer = sr.Recognizer()
 
-
-def is_clean(text):
-    cleaned = re.sub(r'[^\w\s]', '', text.lower())
-    words = set(cleaned.split())
-    if words:
-        return False
-    if re.search(r'<a?:\w+:\d+>', text) or re.search(r'[\U00010000-\U0010ffff]', text):  # Discord or Unicode Emojis
-        return False
-    return True
-
+def remove_mentions(text: str) -> str:
+    ''' Removes Discord Mentions from incoming messages '''
+    return re.sub(r'<[@#]\d+>','',text)
 
 # ---------------- Speak into VC ---------------- #
 async def speak_text_vc(vc: discord.VoiceClient, text: str, filename: str = "response.wav"):
@@ -145,7 +138,8 @@ class MyClient(discord.Client):
         replied = (message.reference and (await message.channel.fetch_message(message.reference.message_id)).author == self.user)
 
         if mentioned or replied or self.greenlight:
-            cleaned_content = re.sub(r"<@&\d+>", "", message.content).strip()
+            cleaned_content = remove_mentions(message.content)
+            cleaned_content = re.sub(r"[^a-zA-Z0-9\s]", "", cleaned_content).strip()
             print(f"User input: {cleaned_content}")
             reply = generate_reply(cleaned_content)
             print(f"Bot reply: {reply}")

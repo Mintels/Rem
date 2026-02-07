@@ -1,3 +1,7 @@
+'''
+File contains functions that support discord voice calls and .wave files as a additional extension for the AI.
+'''
+
 import os
 from TTS.api import TTS
 import discord
@@ -9,7 +13,8 @@ os.makedirs(AUDIO_DIR, exist_ok=True)
 tts = TTS("tts_models/en/vctk/vits", gpu=False)
 
 
-def synthesize_text(input_text: str, filename: str = "response.wav"):     # Generate TTS and save as WAV file, return full path.
+def synthesize_text(input_text: str, filename: str = "response.wav") -> str:
+    '''Generate TTS and save as WAV file, return full path.'''
     output_path = os.path.join(AUDIO_DIR, filename)
     tts.tts_to_file(
         text=input_text,
@@ -35,7 +40,7 @@ async def speak_text(vc, input_text: str, filename: str = "response.wav"):
     )
 
 
-async def _make_ffmpeg_source(path: str):
+async def _make_ffmpeg_source(path: str) -> discord.FFmpegAudio:
     return discord.FFmpegPCMAudio(
         executable="ffmpeg",  # assumes ffmpeg is in PATH
         source=path
