@@ -7,4 +7,5 @@ saves/
 *.csv
 .DS_Store
 Rem.java
+README.md
 components/
