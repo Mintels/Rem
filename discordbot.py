@@ -155,6 +155,7 @@ class MyClient(discord.Client):
 
 
 # ---------------- Commands ---------------- #
+
 client = MyClient()
 
 # /idle command
