@@ -19,7 +19,7 @@ def synthesize_text(input_text: str, filename: str = "response.wav") -> str:
     tts.tts_to_file(
         text=input_text,
         file_path=output_path,
-        speaker="p227"  # change speaker ID if you want
+        speaker="p227"  # Changing ID will change the voice, see TTS documentation for available speakers.
     )
     return output_path
 

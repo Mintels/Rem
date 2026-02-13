@@ -4,7 +4,7 @@ import re
 BATCH_SIZE = 32 # Feeds the model {BATCH_SIZE} sentences at a time.
 HIDDEN_SIZE = 256 # Hidden Size of the Model.
 NUM_EPOCHS = 18 # Number of Training Rounds
-LEARNING_RATE = 0.001 # Experiment With This Value, Stability vs Speed
+LEARNING_RATE = 0.002 # Experiment With This Value, Stability vs Speed
 MAX_LENGTH = 20 # Maximum Sentence Length
 
 # Tokenization and Learned Vocabulary.
@@ -26,8 +26,8 @@ class Vocab:
     def add_sentence(self, sentence: str):
         for word in tokenize(sentence):
             if word not in self.word2idx: # New Word not in Rem's vocabulary.
-                idx = len(self.word2idx) 
-                self.word2idx[word] = idx  # For computer readability, words to numbers. 
+                idx = len(self.word2idx)
+                self.word2idx[word] = idx  # For computer readability, words to numbers.
                 self.idx2word[idx] = word # For human readability, numbers to words.
 
     def sentence_to_indices(self, sentence: str) -> list[int]:

@@ -48,4 +48,4 @@ def generate_reply(input_sentence: str) -> str:
             result.append(top1.item())
             tgt_input = top1.unsqueeze(0)
 
-        return vocab.indices_to_sentence(result)
+        return vocab.indices_to_sentence(result).capitalize()
