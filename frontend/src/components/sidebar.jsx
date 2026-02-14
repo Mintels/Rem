@@ -17,7 +17,7 @@ function Sidebar({isOpen, setIsOpen}) {
                 <h2 className={styles.sidebarTitle}>
                     {isOpen && "Rem AI"}
                 </h2>
-                <img className={styles.titleIcon} src={sidebarIcon}   onClick={toggleSidebar} alt="Sidebar Icon" />
+                <img className={`${styles.titleIcon} ${!isOpen ? styles.closed: ''}`} src={sidebarIcon}   onClick={toggleSidebar} alt="Sidebar Icon" />
             </span>
 
             <ul className={styles.sidebarList}>

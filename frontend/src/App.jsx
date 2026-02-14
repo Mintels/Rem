@@ -1,8 +1,9 @@
-import styles from './App.module.css'
+import styles from './App.module.css';
 import Hero from './components/hero';
 import Footer from './components/footer';
 import Sidebar from './components/sidebar';
 import { useState } from 'react';
+
 function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (

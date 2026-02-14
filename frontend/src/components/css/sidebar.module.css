@@ -15,15 +15,15 @@
     white-space: nowrap;
 }
 
+.sidebarContainer.closed {
+    width: 60px;
+    overflow: hidden; 
+}
+
 .titleContainer {
     display: flex;
     align-items: center;
     height: 70px;
-}
-
-.sidebarContainer.closed {
-    width: 60px;
-    overflow: hidden; 
 }
 
 .sidebarTitle, .subTitle {
@@ -39,6 +39,16 @@
 .sidebarTitle {
     font-size: 1.5rem;
     padding-left: 20px;
+    background-image: linear-gradient(to right, rgb(242, 206, 206), rgb(238, 216, 255), rgb(197, 223, 255));
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;
+    color: transparent;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidebarTitle:hover {
+    transform: scale(1.06);
 }
 
 .sidebarList {
@@ -71,7 +81,22 @@
     background-color: white;
     border-radius: 10px;
     border: 1.5px solid rgba(98, 94, 94);
+    transition: transform 0.2s ease-in-out;
 }
+
+.titleIcon.closed {
+    transition: transform 0.0s;
+    transform: rotate(180deg);
+}
+
+.titleIcon:hover {
+    transform: scale(1.05);
+}
+
+.titleIcon.closed:hover {
+    transform: rotate(180deg) scale(1.05);
+}
+
 
 .sidebarItem {
     display: flex;
