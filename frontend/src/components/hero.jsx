@@ -1,16 +1,16 @@
 import styles from './css/hero.module.css';
 import { useState } from 'react';
 
-function Hero() {
+function Hero({setInitialMessage}) {
 
     const [message, setMessage] = useState("");
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         
         if (!message.trim()) return;
-
-        // Implement Navigation Here
+        
+        setInitialMessage(message);
     }
     return (
         <div className={styles.heroContainer}>

@@ -10,11 +10,10 @@ body {
 .appContainer {
     display: flex; 
     height: 100vh;  
+    min-width: 800px;
     flex-shrink: 0;
     border: 0.9px solid rgba(98, 94, 94, 0.87);
 }
-
-
 
 .sidebar {
     color: #fff;
