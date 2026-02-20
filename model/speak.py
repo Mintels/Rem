@@ -25,10 +25,10 @@ def synthesize_text(input_text: str, filename: str = "response.wav") -> str:
 
 
 async def speak_text(vc, input_text: str, filename: str = "response.wav"):
-    # make audio file
+
     output_path = synthesize_text(input_text, filename)
 
-    # stop anything currently playing
+
     if vc.is_playing():
         vc.stop()
 

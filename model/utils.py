@@ -3,8 +3,8 @@ import re
 # Hyperparameters
 BATCH_SIZE = 32 # Feeds the model {BATCH_SIZE} sentences at a time.
 HIDDEN_SIZE = 256 # Hidden Size of the Model.
-NUM_EPOCHS = 18 # Number of Training Rounds
-LEARNING_RATE = 0.002 # Experiment With This Value, Stability vs Speed
+NUM_EPOCHS = 18 # Number of Training Rounds | BEST RESULTS CURRENTLY AT 18 EPOCHS
+LEARNING_RATE = 0.003 # Experiment With This Value, Stability vs Speed | BEST RESULTS CURRENTLY AT 0.003
 MAX_LENGTH = 20 # Maximum Sentence Length
 
 # Tokenization and Learned Vocabulary.
