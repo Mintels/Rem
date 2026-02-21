@@ -37,5 +37,4 @@ node_modules
 *.sln
 *.sw?
 
-# Backend Tools 
-backend/ 
+db.sqlite3

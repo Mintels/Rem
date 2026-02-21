@@ -1,34 +1,51 @@
 import styles from './css/chat.module.css';
-import { useState, useEffect } from 'react';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Chat({initialMessage}) {
     const [message, setMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState([
         {id: Date.now(), text: initialMessage, sender: "user"},
     ]);
 
-    const initialized = useRef(true);
+    const initialized = useRef(false);
+    const bottomRef = useRef(null);
+    const inputRef = useRef(null);
 
     useEffect(() => {
-        if(!initialized.current) return;
-        initialized.current = false;
+        if(initialized.current) return;
+        initialized.current = true;
 
-        setTimeout(() => {
-            const remMessage = {
-                id: Date.now(),
-                text: "Placeholder",
-                sender: "rem"
-            };
-            setMessages(prev => [...prev, remMessage]);
-        }, 700);
-    });
+        fetch("http://127.0.0.1:8000/chats/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: initialMessage })
+        })
+        .then(res => res.json())
+        .then(data => {
+            setTimeout(() => {
+                const remMessage = {
+                    id: Date.now(),
+                    text: data.reply,
+                    sender: "rem"
+                };
+                setMessages(prev => [...prev, remMessage]);
+                setIsLoading(false);
+                setTimeout(() => inputRef.current?.focus(), 50);
+            }, 700);
+        });
+    }, []);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
-        
+
         if (!message.trim()) return;
+
+        setIsLoading(true);
 
         const userText = message;
 
@@ -38,17 +55,27 @@ export default function Chat({initialMessage}) {
             sender: "user"
         };
 
-        setMessages([...messages, newMessage]);
+        setMessages(prev => [...prev, newMessage]);
         setMessage("");
 
-        setTimeout(() => {
-            const remMessage = {
-                id: Date.now() + 1,
-                text:  "Placeholder",
-                sender: "rem"
-            };
-            setMessages(prev => [...prev, remMessage]);
-        }, 500);
+        fetch("http://127.0.0.1:8000/chats/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userText })
+        })
+        .then(res => res.json())
+        .then(data => {
+            setTimeout(() => {
+                const remMessage = {
+                    id: Date.now(),
+                    text: data.reply,
+                    sender: "rem"
+                };
+                setMessages(prev => [...prev, remMessage]);
+                setIsLoading(false);
+                setTimeout(() => inputRef.current?.focus(), 50);
+            }, 700);
+        });
     }
 
     return (
@@ -59,16 +86,20 @@ export default function Chat({initialMessage}) {
                         {msg.text}
                     </div>
                 ))}
+                <div ref={bottomRef} />
             </div> 
             <div className={styles.inputContainer}>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <input className={styles.input}
-                    onChange ={(e) => setMessage(e.target.value)}
-                    type="text" 
-                    name="message" 
-                    placeholder="Ask me anything..." 
-                    value={message}
-                    required />
+                    <input
+                        ref={inputRef}
+                        className={styles.input}
+                        onChange={(e) => setMessage(e.target.value)}
+                        type="text"
+                        name="message"
+                        placeholder="Ask me anything..."
+                        value={message}
+                        disabled={isLoading}
+                        required />
                 </form>
             </div>
         </div>
