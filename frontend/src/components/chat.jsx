@@ -16,7 +16,7 @@ export default function Chat({initialMessage}) {
         if(initialized.current) return;
         initialized.current = true;
 
-        fetch("https://rem-m6ye.onrender.com/chats/", {
+        fetch("https://mintels.pythonanywhere.com/chats/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: initialMessage })
@@ -58,7 +58,7 @@ export default function Chat({initialMessage}) {
         setMessages(prev => [...prev, newMessage]);
         setMessage("");
 
-        fetch("https://rem-m6ye.onrender.com/chats/", {
+        fetch("https://mintels.pythonanywhere.com/chats/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: userText })
