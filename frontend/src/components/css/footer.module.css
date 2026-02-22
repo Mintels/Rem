@@ -4,8 +4,14 @@
     align-items: center;
     color: rgba(255, 255, 255, 0.87);
     height: 10vh;
+    gap: 18px;
 }
 
 .footerText {
     font-size: 1rem;
+}
+
+.footerIcon { 
+    width: 28px;
+    height: 28px;
 }

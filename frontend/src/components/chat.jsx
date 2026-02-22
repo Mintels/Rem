@@ -15,6 +15,7 @@ export default function Chat({initialMessage}) {
     useEffect(() => {
         if(initialized.current) return;
         initialized.current = true;
+        setIsLoading(true);
 
         fetch("https://mintels.pythonanywhere.com/chats/", {
             method: "POST",
@@ -99,6 +100,7 @@ export default function Chat({initialMessage}) {
                         placeholder="Ask me anything..."
                         value={message}
                         disabled={isLoading}
+                        autoComplete="off"
                         required />
                 </form>
             </div>

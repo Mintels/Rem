@@ -11,7 +11,9 @@ function Hero({setInitialMessage}) {
         if (!message.trim()) return;
         
         setInitialMessage(message);
+
     }
+
     return (
         <div className={styles.heroContainer}>
 
@@ -25,8 +27,8 @@ function Hero({setInitialMessage}) {
                     type="text" 
                     name="message" 
                     placeholder="Ask me anything..." 
-                    value={message}
-                    required />
+                    autocomplete = "off"
+                    value={message}/>
 
                 </form>
             </div>

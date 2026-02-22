@@ -42,15 +42,15 @@
 
 .user {
     align-self: flex-end;
-    background: linear-gradient(to left, rgb(222, 163, 163), rgb(206, 133, 133));
-    color: #333;
+    background: rgb(20, 113, 220);
+    color: #ffffff;
     margin-right: 1rem;
 }
 
 .rem {
     align-self: flex-start;
-    background: linear-gradient(to right, rgb(155, 181, 212), rgb(133, 165, 206));
-    color: #333;
+    background: rgb(65, 167, 72);
+    color: #ffffff;
     margin-left: 1rem;
 }
 

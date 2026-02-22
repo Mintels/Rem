@@ -4,11 +4,11 @@ import json
 
 from model.response import generate_reply
 
-def test(request):
+def test(request) -> HttpResponse:
     return HttpResponse("Rem Backend Server is running")
 
 @csrf_exempt
-def chat(request):
+def chat(request) -> JsonResponse:
     if request.method == "POST":
         data = json.loads(request.body)
         message = data.get("message", "")
