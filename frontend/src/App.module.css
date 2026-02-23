@@ -47,27 +47,30 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .appContainer {
         flex-direction: column;
         border-left: 0px;
-    } 
+        height: 100vh;
+        overflow: hidden;
+    }
 
     .sidebar {
         justify-self: flex-start;
         padding-top: 0px;
-        margin-bottom: 50px;
         z-index: 999;
     }
 
     .mainContent {
+        flex: 1;
         margin-left: 0;
         padding-top: 60px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 60px);
     }
 
     .mainContent.sidebarClosed {
         margin-left: 0;
     }
-
-    
 }

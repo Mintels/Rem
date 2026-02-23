@@ -89,6 +89,22 @@ button:focus {
 
 
 @media (max-width: 768px) {
+    .chatContainer {
+        flex: 1;
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .messages {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        padding-top: 1rem;
+        overflow-y: auto;
+    }
+
     .message {
         max-width: 75%;
     }
@@ -100,13 +116,10 @@ button:focus {
     .inputContainer {
         height: auto;
         min-height: unset;
+        padding-bottom: 10px;
     }
 
     .input {
         height: 60px;
-    }
-
-    .messages {
-        padding-top: 0;
     }
 }
