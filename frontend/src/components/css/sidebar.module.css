@@ -135,6 +135,7 @@
     }
 
     .navBar {
+        background-color: #000000;
         position: fixed;
         top: 0;
         left: 0;

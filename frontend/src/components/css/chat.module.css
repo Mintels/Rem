@@ -1,22 +1,18 @@
 .chatContainer {
-    height: 90vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
     animation: FadeIn 0.7s ease-in-out forwards;
 }
 
 @keyframes FadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-
 .messages {
-    height: 90%;
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -32,13 +28,12 @@
 
 .message {
     padding: 1rem;
-    border-radius:20px; 
+    border-radius: 20px; 
     max-width: 70%;
     word-wrap: break-word;
     margin-bottom: 1.2rem;
     animation: FadeIn 0.4s ease-in-out forwards;
 }
-
 
 .user {
     align-self: flex-end;
@@ -60,13 +55,13 @@
     width: 100%;
     height: 10%;
     min-height: 52px;
+    margin-bottom: 10vh; 
 }
 
 .form {
     width: 60%;
     height: 100%;
 }
-
 
 .input {
     width: 100%;
@@ -87,22 +82,26 @@ button:focus {
     outline: none;
 }
 
+.navSpacer {
+    display: none; 
+}
 
 @media (max-width: 768px) {
     .chatContainer {
-        flex: 1;
-        height: 100%;
+        flex: none;
+        height: calc(90vh - 80px);
         min-height: 0;
         display: flex;
         flex-direction: column;
+        padding-top: 10px;
     }
 
     .messages {
         flex: 1;
         min-height: 0;
-        height: auto;
         padding-top: 1rem;
-        overflow-y: auto;
+        padding-bottom: 1rem;
+        margin-top: 10px;
     }
 
     .message {
@@ -114,12 +113,22 @@ button:focus {
     }
 
     .inputContainer {
+        padding-top: 10px;
         height: auto;
         min-height: unset;
-        padding-bottom: 10px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+        margin-top: 2px;
     }
 
     .input {
         height: 60px;
     }
+    
+    .navSpacer {
+        display: block;
+        height: 60px;
+        flex-shrink: 0;
+    }
+
 }

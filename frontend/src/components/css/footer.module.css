@@ -1,4 +1,8 @@
 .footerContainer { 
+    position: fixed;
+    bottom: 0;
+    left: 200px;
+    width: calc(100% - 200px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +10,12 @@
     height: 10vh;
     gap: 18px;
     z-index: 1000;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.footerContainer.sidebarClosed {
+    left: 60px;
+    width: calc(100% - 60px);
 }
 
 .footerText {
@@ -24,8 +34,16 @@
 
 @media (max-width: 768px) {
     .footerContainer {
-        height: auto;
-        padding: 12px 0;
-        margin-bottom: 10px;
+        left: 0;
+        width: 100%;
+        flex-shrink: 0;
+        margin-top: auto;
+        height: 10vh;
+        transition: none;
+    }
+
+    .footerContainer.sidebarClosed {
+        left: 0;
+        width: 100%;
     }
 }

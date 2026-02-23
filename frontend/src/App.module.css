@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
     scrollbar-width: none;
@@ -8,15 +7,14 @@
     display: none;
 }
 
-
 body {
     margin: 0;
     overflow: hidden;
     position: fixed;
     width: 100%;
     height: 100%;
+    overscroll-behavior: none;
 }
-
 
 .appContainer {
     display: flex;
@@ -61,16 +59,22 @@ body {
     }
 
     .mainContent {
-        flex: 1;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
         margin-left: 0;
-        padding-top: 60px;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 60px);
+        padding-bottom: 10vh;
     }
 
     .mainContent.sidebarClosed {
         margin-left: 0;
+    }
+
+    .mainContent > :last-child {
+        margin-top: auto;
     }
 }

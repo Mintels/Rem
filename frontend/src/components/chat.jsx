@@ -81,6 +81,7 @@ export default function Chat({initialMessage}) {
 
     return (
         <div className={styles.chatContainer}>
+            <div className={styles.navSpacer} />
             <div className={styles.messages}>
                 {messages.map(msg => (
                     <div key={msg.id} className={`${styles.message} ${styles[msg.sender]}`}>

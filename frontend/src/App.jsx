@@ -10,21 +10,16 @@ function App() {
     const [initialMessage, setInitialMessage] = useState(null);
   
     return (
-    <div className={styles.appContainer}>
-
-      <span className={styles.sidebar}>
-        <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen}/>
-      </span>
-      <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.sidebarClosed : ''}`}>
-        {!initialMessage ? <Hero setInitialMessage={setInitialMessage}/> : <Chat initialMessage={initialMessage}/>}
-        <Footer />
-      </div>
-
-
-    </div>
-  )
+        <div className={styles.appContainer}>
+            <span className={styles.sidebar}>
+                <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen}/>
+            </span>
+            <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.sidebarClosed : ''}`}>
+                {!initialMessage ? <Hero setInitialMessage={setInitialMessage}/> : <Chat initialMessage={initialMessage}/>}
+                <Footer isSidebarOpen={isSidebarOpen} />
+            </div>
+        </div>
+    )
 }
 
-
-
-export default App
+export default App;
