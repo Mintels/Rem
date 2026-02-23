@@ -39,11 +39,6 @@
     animation: FadeIn 0.4s ease-in-out forwards;
 }
 
-@media (max-width: 768px) {
-    .message {
-        max-width: 90%;
-    }
-}
 
 .user {
     align-self: flex-end;
@@ -94,14 +89,13 @@ button:focus {
 
 
 @media (max-width: 768px) {
-    .form {
-        width: 90%;
-    }
-
     .message {
         max-width: 75%;
     }
 
+    .form {
+        width: 90%;
+    }
 
     .inputContainer {
         height: auto;
@@ -110,5 +104,9 @@ button:focus {
 
     .input {
         height: 60px;
+    }
+
+    .messages {
+        padding-top: 0;
     }
 }
