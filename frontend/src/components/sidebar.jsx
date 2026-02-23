@@ -59,33 +59,20 @@ function Sidebar({isOpen, setIsOpen}) {
 
         <div className={styles.navBar}> 
             <span className={`${styles.titleContainer}`}>
-                <h2 className={styles.sidebarTitle} onClick={reloadPage}>
-                    Rem AI
+                <h2 className={styles.navbarTitle} onClick={reloadPage}>
+                    {"{R}"}
                 </h2>
-                <img className={`${styles.titleIcon} ${isNavbarOpen ? styles.open : ''}`} src={sidebarIcon} onClick={toggleNavbar} alt="Navbar Icon" />
-        </span>
-        </div>
-
-        {isNavbarOpen && (
-            <ul className={styles.navbarList}>
-                <li className={styles.navbarItem} onClick={reloadPage}>
-                    <img className={styles.imageIcon} src={plusIcon} alt="Plus Icon" />
-                    New Chat
-                </li>
-                <a className={styles.sidebarLink} href={discordLink} target="_blank">
-                    <li className={styles.navbarItem}>
+                <div className={styles.navIcons}>
+                    <a className={styles.navbarLink} href={discordLink} target="_blank">
                         <img className={styles.imageIcon} src={discordIcon} alt="Discord Icon" />
-                        Discord
-                    </li>
-                </a>
-                <a className={styles.sidebarLink} href="https://github.com/Mintels/Rem" target="_blank">
-                    <li className={styles.navbarItem}>
+                    </a>
+                    <a className={styles.navbarLink} href="https://github.com/Mintels/Rem" target="_blank">
                         <img className={styles.imageIcon} src={codeIcon} alt="Code Icon" />
-                        My Code
-                    </li>
-                </a>
-            </ul>
-        )}
+                    </a>
+                    <img className={styles.imageIcon} src={plusIcon} alt="Plus Icon" onClick={reloadPage} />
+                </div>
+            </span>
+        </div>
         </>
     )
 }

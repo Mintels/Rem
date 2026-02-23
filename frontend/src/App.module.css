@@ -11,7 +11,7 @@ body {
     display: flex;
     height: 100vh;
     flex-shrink: 0;
-    border: 0.9px solid rgba(98, 94, 94, 0.87);
+    border-left: 0.9px solid rgba(98, 94, 94, 0.87);
 }
 
 .sidebar {
@@ -39,6 +39,7 @@ body {
 
     .appContainer {
         flex-direction: column;
+        border-left: 0px;
     } 
 
     .sidebar {
@@ -54,4 +55,6 @@ body {
     .mainContent.sidebarClosed {
         margin-left: 0;
     }
+
+    
 }
