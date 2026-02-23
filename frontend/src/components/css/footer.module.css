@@ -22,3 +22,10 @@
     transform: scale(1.2);
 }
 
+@media (max-width: 768px) {
+    .footerContainer {
+        height: auto;
+        padding: 12px 0;
+        margin-bottom: 20px;
+    }
+}

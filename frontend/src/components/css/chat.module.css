@@ -101,4 +101,14 @@ button:focus {
     .message {
         max-width: 75%;
     }
+
+
+    .inputContainer {
+        height: auto;
+        min-height: unset;
+    }
+
+    .input {
+        height: 60px;
+    }
 }
