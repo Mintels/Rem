@@ -6,7 +6,7 @@ import Sidebar from './components/sidebar';
 import { useState } from 'react';
 
 function App() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
     const [initialMessage, setInitialMessage] = useState(null);
   
     return (

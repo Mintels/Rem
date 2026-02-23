@@ -41,6 +41,13 @@
     height: 100%;
 }
 
+
+@media (max-width: 768px) {
+    .form {
+        width: 90%;
+    }
+}
+
 @keyframes upFadeIn {
     from {
         opacity: 0;

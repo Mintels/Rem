@@ -8,9 +8,8 @@ body {
 }
 
 .appContainer {
-    display: flex; 
-    height: 100vh;  
-    min-width: 800px;
+    display: flex;
+    height: 100vh;
     flex-shrink: 0;
     border: 0.9px solid rgba(98, 94, 94, 0.87);
 }
@@ -22,6 +21,7 @@ body {
     align-items: left;
     padding-top: 20px;
 }
+
 .mainContent {
     display: flex;
     flex-direction: column;
@@ -33,4 +33,25 @@ body {
 
 .mainContent.sidebarClosed {
     margin-left: 60px; 
+}
+
+@media (max-width: 768px) {
+
+    .appContainer {
+        flex-direction: column;
+    } 
+
+    .sidebar {
+        justify-self: flex-start;
+        padding-top: 0px;
+        margin-bottom: 50px;
+        z-index: 999;
+    }
+    .mainContent {
+        margin-left: 0;
+    }
+
+    .mainContent.sidebarClosed {
+        margin-left: 0;
+    }
 }

@@ -49,6 +49,7 @@
 
 .sidebarTitle:hover {
     transform: scale(1.06);
+    cursor: pointer;
 }
 
 .sidebarList {
@@ -68,7 +69,7 @@
     width: 25px;
     height: 25px;
     margin-right: 10px;
-    background-color: #323232;
+    background-color: #292929;
     padding: 3px;
     border-radius: 7px;
     border: 1.5px solid rgb(202, 192, 192,0.8);
@@ -79,11 +80,12 @@
     height: 26px;
     margin-left: auto;
     margin-right: 20px;
-    background-color: #323232;
+    background-color: #292929;
     border-radius: 10px;
     border: 1.5px solid rgb(202, 192, 192);
     transition: transform 0.2s ease-in-out;
     padding: 5.5px;
+    transform: rotate(180deg);
 }
 
 .sidebarLink { 
@@ -92,16 +94,17 @@
 }
 
 .titleIcon.closed {
-    transition: transform 0.0s;
-    transform: rotate(180deg);
+    transform: rotate(360deg);
+    transition: transform 0.2s ease-in-out;
 }
 
 .titleIcon:hover {
-    transform: scale(1.05);
+    transform: rotate(180deg) scale(1.05);
 }
 
 .titleIcon.closed:hover {
-    transform: rotate(180deg) scale(1.05);
+    transition: transform 0.2s ease-in-out;
+    transform: rotate(360deg) scale(1.05);
 }
 
 
@@ -119,4 +122,93 @@
 .subTitle {
     margin-left: 20px;
     font-size: 0.9rem;
+}
+
+.navBar {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    .sidebarContainer {
+        display: none;
+    }
+
+    .navBar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #212121;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 0.5px solid rgb(15, 13, 13);
+        z-index: 100;
+    }
+
+    .titleContainer {
+        width: 100%;
+        height: 60px;
+        justify-content: space-between;
+    }
+
+    .titleIcon {
+        background-color: #292929;
+        border-radius: 10px;
+        border: 1.5px solid rgb(202, 192, 192);
+        transition: transform 0.2s ease-in-out;
+        padding: 5.5px;
+        transform: rotate(90deg);
+    }
+
+    .titleIcon.open {
+        transform: rotate(270deg);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .titleIcon:hover {
+        transform: rotate(90deg) scale(1.05);
+    }
+
+    .titleIcon.open:hover {
+        transition: transform 0.2s ease-in-out;
+        transform: rotate(270deg) scale(1.05);
+    }
+
+    .navbarList {
+        display: flex;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-top: 0.9px solid rgba(98, 94, 94, 0.87);
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        background-color: rgba(24, 23, 23, 0.95);
+        z-index: 999;
+        flex-direction: column;
+        padding-top: 20px;
+        list-style: none;
+        margin: 0;
+        overflow: hidden;
+        animation: dropdownExpand 0.5s ease-out forwards;
+    }
+
+    .navbarItem {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 15px 20px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    @keyframes dropdownExpand {
+        from { height: 0; }
+        to { height: 22%; }
+    }
+    
 }

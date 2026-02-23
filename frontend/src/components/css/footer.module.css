@@ -5,6 +5,7 @@
     color: rgba(255, 255, 255, 0.87);
     height: 10vh;
     gap: 18px;
+    z-index: 1000;
 }
 
 .footerText {
@@ -14,4 +15,10 @@
 .footerIcon { 
     width: 28px;
     height: 28px;
+    transition: transform 0.2s ease-in-out;
 }
+
+.footerIcon:hover {
+    transform: scale(1.2);
+}
+
