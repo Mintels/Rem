@@ -5,14 +5,14 @@ import pandas as pd
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
-from model.utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE # Specifications For Model
+from utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE # Specifications For Model
 
 
 # ----------- File Paths & Configurations ----------- 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-CUSTOM_DATA = os.path.join(BASE_DIR, "data", "dialogues.csv") # Custom Dialogue Data
+CUSTOM_DATA = os.path.join(BASE_DIR, "data", "daily_dialog.csv") # Custom Dialogue Data
 EXAMPLE_DATA = os.path.join(BASE_DIR, "data", "dialogues.csv") # Custom Dialogue Data
 
 DATA = CUSTOM_DATA if os.path.exists(CUSTOM_DATA) else EXAMPLE_DATA
@@ -133,7 +133,7 @@ def train():
             loss.backward() # Compute new gradients
             optimizer.step() # Update model parameters
             total_loss += loss.item()
-        print(f"Epoch {epoch+1} Loss: {total_loss / len(dataloader):.4f}")
+        print(f"Epoch: {epoch+1}, Loss: {total_loss / len(dataloader):.6f}")
 
     # Save
     torch.save({'encoder': encoder.state_dict(), 'decoder': decoder.state_dict()}, MODEL_FILE)

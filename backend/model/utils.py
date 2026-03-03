@@ -1,17 +1,23 @@
 import re
 
 # Hyperparameters
-BATCH_SIZE = 32 # Feeds the model {BATCH_SIZE} sentences at a time.
-HIDDEN_SIZE = 256 # Hidden Size of the Model.
-NUM_EPOCHS = 18 # Number of Training Rounds | BEST RESULTS CURRENTLY AT 18 EPOCHS
-LEARNING_RATE = 0.003 # Experiment With This Value, Stability vs Speed | BEST RESULTS CURRENTLY AT 0.003
+BATCH_SIZE = 128 # Feeds the model {BATCH_SIZE} sentences at a time.
+HIDDEN_SIZE = 512 # Hidden Size of the Model.
+NUM_EPOCHS = 20 # Number of Training Rounds 
+LEARNING_RATE = 0.001 # How Fast the Model Learns
 MAX_LENGTH = 20 # Maximum Sentence Length
 
-# Tokenization and Learned Vocabulary.
-def tokenize(sentence: str):
+def tokenize(sentence: str) -> list[str]:
+    ''' Tokenizes a sentence into a list of words. '''
     tokens = sentence.lower().split() # Split Tokens by Whitespace/Spaces.
     tokens = [re.sub(r'[^a-z0-9]', '', t) for t in tokens]  # Removal of Special Characters. 
     return [t for t in tokens if t]  # Removes Empty Tokens.
+
+def clean_content(text: str) -> str:
+    ''' Cleaning Content for Model Input. '''
+    content = re.sub(r"[^a-zA-Z0-9\s]", "", text)  # Substitutes every non-letter, non-digit, and non-whitespace character with an empty string.
+    return re.sub(r"\s+", " ", content).strip() # Replaces multiple whitespace characters with a single space and removes leading/trailing whitespace.
+
 
 # Vocabulary Class
 class Vocab:
