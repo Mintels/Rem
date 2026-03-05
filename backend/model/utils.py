@@ -1,17 +1,20 @@
 import re
 
 # Hyperparameters
-BATCH_SIZE = 128 # Feeds the model {BATCH_SIZE} sentences at a time.
-HIDDEN_SIZE = 512 # Hidden Size of the Model.
-NUM_EPOCHS = 20 # Number of Training Rounds 
-LEARNING_RATE = 0.001 # How Fast the Model Learns
-MAX_LENGTH = 20 # Maximum Sentence Length
+BATCH_SIZE = 64 # Feeds the model {BATCH_SIZE} sentences at a time.
+HIDDEN_SIZE = 256 # Hidden Size of the Model.
+NUM_EPOCHS = 30 # Number of Training Rounds 
+LEARNING_RATE = 0.0005 # How Fast the Model Learns
+MAX_LENGTH = 15 # Maximum Sentence Length
 
 def tokenize(sentence: str) -> list[str]:
     ''' Tokenizes a sentence into a list of words. '''
     tokens = sentence.lower().split() # Split Tokens by Whitespace/Spaces.
     tokens = [re.sub(r'[^a-z0-9]', '', t) for t in tokens]  # Removal of Special Characters. 
     return [t for t in tokens if t]  # Removes Empty Tokens.
+
+def is_single_sentence(sentence: str) -> bool:
+    return sentence.count('.') <= 1 and len(sentence.split()) <= 12
 
 def clean_content(text: str) -> str:
     ''' Cleaning Content for Model Input. '''
@@ -42,4 +45,4 @@ class Vocab:
 
     def indices_to_sentence(self, indices: list[int]) -> str:
         # Indices to Matching Sentence
-        return ' '.join([self.idx2word.get(idx, '<unk>') for idx in indices if idx > 2])
+        return ' '.join([self.idx2word.get(idx, '<unk>') for idx in indices if idx > 2]) 

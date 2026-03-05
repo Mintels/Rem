@@ -42,10 +42,12 @@ dialogues[output_col] = clean_column(dialogues[output_col])
 
 column_pairs = []
 for row in dialogues.itertuples():
-    inp = getattr(row, input_col)  # Gets the cell value from specified row & column
-    outs = getattr(row, output_col).split('||')  # splits output by '||' delimiter for multiple responses.
+    inps = getattr(row, input_col)  # Gets the cell value from specified row & column
+    outs = getattr(row, output_col).split('||')
     for out in outs:
-        column_pairs.append((inp.strip(), out.strip()))
+        inp, out = inps.strip(), out.strip()
+        column_pairs.append((inp, out))
+column_pairs = list(set(column_pairs))
 
 class ChatDataset(Dataset): # Inherits from PyTorch's Dataset class 
 
