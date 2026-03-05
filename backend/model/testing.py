@@ -1,8 +1,8 @@
 import os
 
-from train import MODEL_FILE, VOCAB_FILE
-from response import generate_reply
-from utils import clean_content
+from .train import MODEL_FILE, VOCAB_FILE
+from .response import generate_reply
+from .utils import clean_content
 
 
 def run_chat() -> None:

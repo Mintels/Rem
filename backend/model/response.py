@@ -2,8 +2,8 @@ import os
 import torch
 import pickle
 from torch.serialization import add_safe_globals
-from train import Encoder, Decoder
-from utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE
+from .train import Encoder, Decoder
+from .utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE
 
 
 
