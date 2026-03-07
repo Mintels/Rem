@@ -1,37 +1,27 @@
-# Rem: An AI Conversational Companion
+# <img width="50" height="50" alt="Remicon" src="https://github.com/user-attachments/assets/c585e026-5946-4c37-a5f2-094ac5fbba8e" /> Rem: An AI Conversational Companion
 
-Rem is a voice, memory, and personality-based AI personal companion. compared to conventional chatbots, Rem is an AI-powered assistant with the goal to feel more human. Rem, compared with conventional assistants, creates engaging, customized interactions by combining expressive voice synthesis, conversational memory, and natural language understanding.
+Rem is a memory and personality-based AI personal companion. Unlike conventional chatbots, Rem creates engaging, customized interactions through conversational memory and natural language understanding — built to feel more human.
 
 ## Example Application
-<br>
 <div align="center">
-	<img width="558" height="234" src="https://github.com/user-attachments/assets/eb73115e-cc47-4ea5-9fc4-80ebc2da3988" />
-	<br>
-	<img width="558" height="234" src="https://github.com/user-attachments/assets/57922239-8290-4426-9fc8-a6be8d2731e4" />
+    <img width="700" src="https://github.com/user-attachments/assets/7a11f842-63d7-4352-aeb1-11119d6d1b0a" />
+	<img width="700" src="https://github.com/user-attachments/assets/d2e08277-c592-433c-b341-94791fe7ebd5" />
 </div>
 <br>
 
+## Tech Stack 
 
-## Tech Stack
-<a href=https://pytorch.org/>PyTorch</a></br> 
-<a href=https://pypi.org/project/TTS/>Coqui TTS</a></br>
-<a href=https://pypi.org/project/SpeechRecognition/>Speech Recognition</a></br>
-<a href="https://discord.com/developers/docs/reference">Discord</a></br>
-<a href="https://pypi.org/project/discord-ext-voice-recv/">Discord-Ext-Voice-Recv</a></br>
+### AI/ML Development
+[PyTorch](https://pytorch.org/), [Pandas](https://pandas.pydata.org/), and [Hugging Face Datasets](https://huggingface.co/datasets/)
+
+### Backend Development
+[Django](https://www.djangoproject.com/), [Discord API](https://discord.com/developers/docs/reference), and [PythonAnywhere](https://www.pythonanywhere.com/)
+
+### Frontend Development
+[React.JS](https://react.dev/) and [Node.JS](https://nodejs.org/)
 
 ## Dataset Format
 
-The dataset is stored as comma separated values, where each line contains *one* input and *three* outputs.
+This project utilizes a modified version of the <a href="https://huggingface.co/datasets/roskoN/dailydialog">DailyDialog Multi-turn Dialog Dataset</a>, with 21,000 additional input-output pairs specialized towards A1-A2 CEFR English responses were added. 
 
-```
-"input","outputs"
-"Would you skydive?","Maybe, if I was with friends.||I'd consider it if someone encouraged me.||With support, I might give it a shot."
-"Can you name all the US presidents?","I feel a bit embarrassed, but I can't name them all.||I'm not sure I could list every president.||That would be tough for me to do."
-"Did you ever have a pen pal?","I never had one, but I always wanted to.||I missed out on that experience.||It sounds like it would have been nice."
-```
-
-How to Read This: <br>
-	•	Input (First Column) → What the user may say to Rem. <br>
-	•	Output (Second Column) → three Examples of how Rem COULD reply, Delimited by "||" <br>
-	•	Each line → *three* training examples. <br>
-
+The supplementary data was introduced to mitigate overfitting and broaden response coverage beyond the scope of the original 21,000 custom input-output pairs.
