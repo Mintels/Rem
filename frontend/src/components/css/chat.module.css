@@ -65,13 +65,13 @@
 
 .input {
     width: 100%;
-    height: 100%;
+    height: 90%;
     padding: 0.75rem;
     font-size: 1rem;
     border: none;
     border-radius: 5rem;
-    border: 1.2px solid rgba(62, 59, 59, 0.87);
-    background-color: #232222;
+    border: 1.2px solid rgb(77, 73, 73);
+    background-color: rgb(29, 29, 29);
     padding-left: 30px;
     color: white;
 }
@@ -84,52 +84,89 @@ button:focus {
 }
 
 .navSpacer {
-    display: none; 
+    display: none;
 }
 
 @media (max-width: 768px) {
     .chatContainer {
-        flex: none;
-        height: calc(90vh - 80px);
-        min-height: 0;
+        --mobile-navbar-height: 8px;
         display: flex;
         flex-direction: column;
-        padding-top: 10px;
+        flex: 1;
+        width: 95%;
+        max-width: 95%;
+        min-height: 0;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0;
+        animation: none;
+    }
+
+    .navSpacer {
+        display: block;
+        height: var(--mobile-navbar-height);
+        flex-shrink: 0;
     }
 
     .messages {
+        display: flex;
+        flex-direction: column;
         flex: 1;
         min-height: 0;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        margin-top: 10px;
+        justify-content: flex-start;
+        overflow-y: auto;
+        margin: 0;
+        padding: 16px 0 0;
     }
 
     .message {
-        max-width: 75%;
+        max-width: 53%;
+        width: fit-content;
+        margin: 0 0 0.95rem;
+        padding: 0.8rem;
+        border-radius: 16px;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
     }
 
-    .form {
-        width: 90%;
+    .user {
+        align-self: flex-end;
+        margin-right: 0;
+    }
+
+    .rem {
+        align-self: flex-start;
+        margin-left: 0;
     }
 
     .inputContainer {
-        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
         height: auto;
-        min-height: unset;
+        min-height: 72px;
         flex-shrink: 0;
-        margin-bottom: 0;
-        margin-top: 2px;
+        margin: 0;
+        margin-top: auto;
+        margin-bottom: 78px;
+        padding: 8px 0 0;
+    }
+
+    .form {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
     }
 
     .input {
-        height: 60px;
-    }
-    
-    .navSpacer {
-        display: block;
-        height: 60px;
-        flex-shrink: 0;
+        width: 100%;
+        height: auto;
+        min-height: 60px;
+        margin: 0;
+        border-radius: 5rem;
+        padding: 0.75rem 1.4rem;
     }
 
 }

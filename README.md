@@ -21,7 +21,7 @@ Rem is a memory and personality-based AI personal companion. Unlike conventional
 
 ## Dataset Format
 
-This project utilizes a modified version of the <a href="https://huggingface.co/datasets/roskoN/dailydialog">DailyDialog Multi-turn Dialog Dataset</a>, with 21,000 additional input-output pairs specialized towards A1-A2 CEFR English responses were added. 
+This project utilizes a modified version of the <a href="https://huggingface.co/datasets/roskoN/dailydialog">DailyDialog Multi-turn Dialog Dataset</a>, with 21,000 additional input-output pairs specialized towards A1-A2 CEFR English responses added.
 
 The supplementary data was introduced to mitigate overfitting and broaden response coverage beyond the scope of the original 21,000 custom input-output pairs.
 

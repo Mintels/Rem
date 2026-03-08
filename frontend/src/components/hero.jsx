@@ -27,7 +27,7 @@ function Hero({setInitialMessage}) {
                     type="text" 
                     name="message" 
                     placeholder="Ask me anything..." 
-                    autocomplete = "off"
+                    autoComplete="off"
                     value={message}/>
 
                 </form>

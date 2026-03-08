@@ -1,4 +1,6 @@
 import re
+import torch
+import torch.nn as nn
 
 # Hyperparameters
 BATCH_SIZE = 64 # Feeds the model {BATCH_SIZE} sentences at a time.
@@ -13,8 +15,6 @@ def tokenize(sentence: str) -> list[str]:
     tokens = [re.sub(r'[^a-z0-9]', '', t) for t in tokens]  # Removal of Special Characters. 
     return [t for t in tokens if t]  # Removes Empty Tokens.
 
-def is_single_sentence(sentence: str) -> bool:
-    return sentence.count('.') <= 1 and len(sentence.split()) <= 12
 
 def clean_content(text: str) -> str:
     ''' Cleaning Content for Model Input. '''
@@ -45,4 +45,31 @@ class Vocab:
 
     def indices_to_sentence(self, indices: list[int]) -> str:
         # Indices to Matching Sentence
-        return ' '.join([self.idx2word.get(idx, '<unk>') for idx in indices if idx > 2]) 
+        return ' '.join([self.idx2word.get(idx, '<unk>') for idx in indices if idx > 2])
+    
+
+
+# ----------- Model Specifications ----------- 
+class Encoder(nn.Module):
+    def __init__(self, vocab_size: int, embed_size: int, hidden_size: int):
+        super().__init__()
+        self.embed = nn.Embedding(vocab_size, embed_size) # Lookup Table for Dense Vector Representation of Words
+        self.rnn = nn.GRU(embed_size, hidden_size)  # Update hidden state based on input and previous hidden state
+
+    def forward(self, src: torch.Tensor, hidden=None): 
+        embedded = self.embed(src) # Convert indices to dense vectors
+        outputs, hidden = self.rnn(embedded, hidden) # Keeps track of what it has heard.
+        return outputs, hidden 
+    
+class Decoder(nn.Module):
+    def __init__(self, vocab_size: int, embed_size: int, hidden_size: int):
+        super().__init__()
+        self.embed = nn.Embedding(vocab_size, embed_size) # Lookup Table for Dense Vector Representation of Words
+        self.rnn = nn.GRU(embed_size, hidden_size)  # Update hidden state based on input and previous hidden state
+        self.fc = nn.Linear(hidden_size, vocab_size) # Map hidden state to vocab distribution
+
+    def forward(self, tgt: torch.Tensor, hidden: torch.Tensor):
+        embedded = self.embed(tgt) # Convert indices to dense vectors
+        outputs, hidden = self.rnn(embedded, hidden) # Keeps track of what it has said.
+        predictions = self.fc(outputs) # Probability distribution over the vocabulary for each time step
+        return predictions, hidden

@@ -5,7 +5,7 @@ import pandas as pd
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
-from .utils import Vocab, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE # Specifications For Model
+from .utils import Vocab, Encoder, Decoder, BATCH_SIZE, HIDDEN_SIZE, MAX_LENGTH, NUM_EPOCHS, LEARNING_RATE # Specifications For Model
 
 
 # ----------- File Paths & Configurations ----------- 
@@ -78,33 +78,6 @@ def collate_fn(batch: list[tuple[torch.Tensor, torch.Tensor]]) -> tuple[torch.Te
     target_batch = nn.utils.rnn.pad_sequence(target_batch, padding_value=0) 
 
     return input_batch, target_batch
-
-
-# ----------- Model Specifications ----------- 
-
-class Encoder(nn.Module):
-    def __init__(self, vocab_size: int, embed_size: int, hidden_size: int):
-        super().__init__()
-        self.embed = nn.Embedding(vocab_size, embed_size) # Lookup Table for Dense Vector Representation of Words
-        self.rnn = nn.GRU(embed_size, hidden_size)  # Update hidden state based on input and previous hidden state
-
-    def forward(self, src: torch.Tensor, hidden=None): 
-        embedded = self.embed(src) # Convert indices to dense vectors
-        outputs, hidden = self.rnn(embedded, hidden) # Keeps track of what it has heard.
-        return outputs, hidden 
-    
-class Decoder(nn.Module):
-    def __init__(self, vocab_size: int, embed_size: int, hidden_size: int):
-        super().__init__()
-        self.embed = nn.Embedding(vocab_size, embed_size) # Lookup Table for Dense Vector Representation of Words
-        self.rnn = nn.GRU(embed_size, hidden_size)  # Update hidden state based on input and previous hidden state
-        self.fc = nn.Linear(hidden_size, vocab_size) # Map hidden state to vocab distribution
-
-    def forward(self, tgt: torch.Tensor, hidden: torch.Tensor):
-        embedded = self.embed(tgt) # Convert indices to dense vectors
-        outputs, hidden = self.rnn(embedded, hidden) # Keeps track of what it has said.
-        predictions = self.fc(outputs) # Probability distribution over the vocabulary for each time step
-        return predictions, hidden
 
 
 # ----------- Model Traning Loop ----------- 
