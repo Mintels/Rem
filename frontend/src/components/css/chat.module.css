@@ -2,6 +2,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
     animation: FadeIn 0.7s ease-in-out forwards;
 }
 
@@ -53,8 +55,9 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 10%;
-    min-height: 52px;
+    height: 72px;
+    min-height: 72px;
+    flex-shrink: 0;
     margin-bottom: 10vh; 
 }
 
@@ -65,7 +68,7 @@
 
 .input {
     width: 100%;
-    height: 90%;
+    height: 60px;
     padding: 0.75rem;
     font-size: 1rem;
     border: none;
@@ -81,6 +84,48 @@ select:focus,
 textarea:focus,
 button:focus {
     outline: none;
+}
+
+.typingIndicator {
+    align-self: flex-start;
+    background: rgb(65, 167, 72);
+    border-radius: 20px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 1.2rem;
+    margin-left: 1rem;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    animation: FadeIn 0.4s ease-in-out forwards;
+}
+
+.typingIndicator span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffffff;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typingIndicator span:nth-child(1) { animation-delay: 0s; }
+.typingIndicator span:nth-child(2) { animation-delay: 0.2s; }
+.typingIndicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 60%, 100% { opacity: 1; transform: translateY(0); }
+    30% { opacity: 0.2; transform: translateY(-5px); }
+}
+
+.errorBubble {
+    align-self: flex-start;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    border-radius: 20px;
+    background: rgba(0, 255, 255, 0.5);
+    border: 1.2px solid rgba(0, 255, 255);
+    color: rgb(255, 251, 251);
+    font-size: 0.85rem;
 }
 
 .navSpacer {
@@ -137,6 +182,22 @@ button:focus {
     .rem {
         align-self: flex-start;
         margin-left: 0;
+    }
+
+    .typingIndicator {
+        margin-left: 0;
+        margin-bottom: 0.95rem;
+        padding: 0.8rem;
+        border-radius: 16px;
+    }
+
+    .errorBubble {
+        margin-left: 0;
+        margin-bottom: 0.95rem;
+        padding: 0.8rem;
+        border-radius: 16px;
+        max-width: 53%;
+        width: fit-content;
     }
 
     .inputContainer {
