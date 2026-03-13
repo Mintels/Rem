@@ -6,7 +6,7 @@ export default function Chat({initialMessage}) {
     const [isLoading, setIsLoading] = useState(false);
     const [timedOut, setTimedOut] = useState(false);
     const [messages, setMessages] = useState(() => {
-        const noticeText = "Reminder: This is a proof of concept application, Refer to source code for more details.";
+        const noticeText = "Reminder: This is a proof of concept application. Refer to source code for more details.";
         const now = Date.now();
 
         return [
@@ -20,17 +20,12 @@ export default function Chat({initialMessage}) {
     const inputRef = useRef(null);
     const errorTimerRef = useRef(null);
 
-    useEffect(() => {
-        if(initialized.current) return;
-        initialized.current = true;
-        setIsLoading(true);
-        setTimedOut(false);
-        errorTimerRef.current = setTimeout(() => { setTimedOut(true); setIsLoading(false); }, 12000);
 
+    const getResponse = (userMessage) => {
         fetch("https://mintels.pythonanywhere.com/chats/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: initialMessage })
+            body: JSON.stringify({ message: userMessage })
         })
         .then(res => res.json())
         .then(data => {
@@ -46,7 +41,18 @@ export default function Chat({initialMessage}) {
                 setTimeout(() => inputRef.current?.focus(), 50);
             }, 700);
         });
+    }
+
+    useEffect(() => {
+        if(initialized.current) return;
+        initialized.current = true;
+        setIsLoading(true);
+        setTimedOut(false);
+        errorTimerRef.current = setTimeout(() => { setTimedOut(true); setIsLoading(false); }, 12000);
+
+        getResponse(initialMessage);
     }, []);
+
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,25 +79,7 @@ export default function Chat({initialMessage}) {
         setMessages(prev => [...prev, newMessage]);
         setMessage("");
 
-        fetch("https://mintels.pythonanywhere.com/chats/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userText })
-        })
-        .then(res => res.json())
-        .then(data => {
-            clearTimeout(errorTimerRef.current);
-            setTimeout(() => {
-                const remMessage = {
-                    id: Date.now(),
-                    text: data.reply,
-                    sender: "rem"
-                };
-                setMessages(prev => [...prev, remMessage]);
-                setIsLoading(false);
-                setTimeout(() => inputRef.current?.focus(), 50);
-            }, 700);
-        });
+        getResponse(userText);
     }
 
     return (
