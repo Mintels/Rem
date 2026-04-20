@@ -61,7 +61,7 @@ class ChatDataset(Dataset): # Inherits from PyTorch's Dataset class
     def __getitem__(self, idx: int) -> tuple[torch.Tensor, torch.Tensor]:
         '''Converts the idx-th input/output pair into tensors of vocab indices with <sos> and <eos> tokens'''
 
-        input, target = self.pairs[idx] 
+        input, target = self.pairs[idx]
 
         input_ids = [1] + self.vocab.sentence_to_indices(input)[:MAX_LENGTH] + [2]
         target_ids = [1] + self.vocab.sentence_to_indices(target)[:MAX_LENGTH] + [2]
@@ -80,7 +80,7 @@ def collate_fn(batch: list[tuple[torch.Tensor, torch.Tensor]]) -> tuple[torch.Te
     return input_batch, target_batch
 
 
-# ----------- Model Traning Loop ----------- 
+# ----------- Model Traning Loop -----------
 
 def train():
     vocab = Vocab() # Initializing our Vocabulary Class.
@@ -102,8 +102,9 @@ def train():
         for src, tgt in dataloader:
             src, tgt = src.to(device), tgt.to(device)
             optimizer.zero_grad() # Reset gradients pre backpropagation
-            _, hidden = encoder(src) # encoder hidden state
-            output, _ = decoder(tgt[:-1], hidden) # predictions 
+            encoder_outputs, hidden = encoder(src) # encoder states for attention + final hidden state
+            src_mask = (src != 0).transpose(0, 1) # [batch, src_len], True for non-padding tokens
+            output, _ = decoder(tgt[:-1], hidden, encoder_outputs, src_mask=src_mask) # attention-based predictions
             loss = criterion(output.view(-1, output.size(-1)), tgt[1:].reshape(-1)) # Shifted target for teacher forcing
             loss.backward() # Compute new gradients
             optimizer.step() # Update model parameters

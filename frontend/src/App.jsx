@@ -3,6 +3,7 @@ import Hero from './components/hero';
 import Chat from './components/Chat';
 import Footer from './components/footer';
 import Sidebar from './components/sidebar';
+import OnLoad from './components/onload';
 import { useState } from 'react';
 
 function App() {
@@ -10,6 +11,8 @@ function App() {
     const [initialMessage, setInitialMessage] = useState(null);
   
     return (
+        <>
+        <OnLoad />
         <div className={styles.appContainer}>
             <span className={styles.sidebar}>
                 <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen}/>
@@ -19,6 +22,7 @@ function App() {
                 <Footer isSidebarOpen={isSidebarOpen} />
             </div>
         </div>
+        </>
     )
 }
 
