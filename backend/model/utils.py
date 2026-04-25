@@ -4,8 +4,8 @@ import torch.nn as nn
 
 # Hyperparameters
 BATCH_SIZE = 64 # Feeds the model {BATCH_SIZE} sentences at a time.
-HIDDEN_SIZE = 256 # Hidden Size of the Model.
-NUM_EPOCHS = 30 # Number of Training Rounds
+HIDDEN_SIZE = 512 # Hidden Size of the Model.
+NUM_EPOCHS = 15 # Number of Training Rounds
 LEARNING_RATE = 0.0005 # How Fast the Model Learns
 MAX_LENGTH = 15 # Maximum Sentence Length
 

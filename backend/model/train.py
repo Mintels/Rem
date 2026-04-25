@@ -94,27 +94,42 @@ def train():
     encoder = Encoder(len(vocab.word2idx), HIDDEN_SIZE, HIDDEN_SIZE).to(device)
     decoder = Decoder(len(vocab.word2idx), HIDDEN_SIZE, HIDDEN_SIZE).to(device)
 
+    if os.path.exists(MODEL_FILE):
+        checkpoint = torch.load(MODEL_FILE, map_location=device)
+        if 'encoder' in checkpoint and 'decoder' in checkpoint:
+            encoder.load_state_dict(checkpoint['encoder'])
+            decoder.load_state_dict(checkpoint['decoder'])
+            print(f"Loaded existing checkpoint from {MODEL_FILE}")
+
     criterion = nn.CrossEntropyLoss(ignore_index=0)
     optimizer = optim.Adam(list(encoder.parameters()) + list(decoder.parameters()), lr=LEARNING_RATE)
 
-    for epoch in range(NUM_EPOCHS):
-        total_loss = 0 # Track loss across batches
-        for src, tgt in dataloader:
-            src, tgt = src.to(device), tgt.to(device)
-            optimizer.zero_grad() # Reset gradients pre backpropagation
-            encoder_outputs, hidden = encoder(src) # encoder states for attention + final hidden state
-            src_mask = (src != 0).transpose(0, 1) # [batch, src_len], True for non-padding tokens
-            output, _ = decoder(tgt[:-1], hidden, encoder_outputs, src_mask=src_mask) # attention-based predictions
-            loss = criterion(output.view(-1, output.size(-1)), tgt[1:].reshape(-1)) # Shifted target for teacher forcing
-            loss.backward() # Compute new gradients
-            optimizer.step() # Update model parameters
-            total_loss += loss.item()
-        print(f"Epoch: {epoch+1}, Loss: {total_loss / len(dataloader):.6f}")
+    try:
+        for epoch in range(NUM_EPOCHS):
+            total_loss = 0 # Track loss across batches
+            for src, tgt in dataloader:
+                src, tgt = src.to(device), tgt.to(device)
+                optimizer.zero_grad() # Reset gradients pre backpropagation
+                encoder_outputs, hidden = encoder(src) # encoder states for attention + final hidden state
+                src_mask = (src != 0).transpose(0, 1) # [batch, src_len], True for non-padding tokens
+                output, _ = decoder(tgt[:-1], hidden, encoder_outputs, src_mask=src_mask) # attention-based predictions
+                loss = criterion(output.view(-1, output.size(-1)), tgt[1:].reshape(-1)) # Shifted target for teacher forcing
+                loss.backward() # Compute new gradients
+                optimizer.step() # Update model parameters
+                total_loss += loss.item()
+            print(f"Epoch: {epoch+1}, Loss: {total_loss / len(dataloader):.6f}")
+    except KeyboardInterrupt:
+        print("\nTraining interrupted. Saving model")
+        torch.save({'encoder': encoder.state_dict(), 'decoder': decoder.state_dict()}, MODEL_FILE)
+        with open(VOCAB_FILE, 'wb') as f:
+            pickle.dump(vocab, f)
+        print(f"Saved interrupted checkpoint to {MODEL_FILE}")
+        return
 
     # Save
     torch.save({'encoder': encoder.state_dict(), 'decoder': decoder.state_dict()}, MODEL_FILE)
     with open(VOCAB_FILE, 'wb') as f:
-        pickle.dump(vocab, f) 
+        pickle.dump(vocab, f)
 
 if __name__ == "__main__":
     train()
