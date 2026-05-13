@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 90vh;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.5) 0%, rgba(26, 15, 46, 0.4) 50%, rgba(10, 10, 10, 0.5) 100%);
 }
 
 .title {
@@ -60,7 +61,7 @@
     border: none;
     border-radius: 5rem;
     border: 1.2px solid rgb(77, 73, 73);
-    background-color: rgb(29, 29, 29);
+    background: linear-gradient(135deg, rgb(29, 29, 29) 0%, rgb(40, 30, 50) 100%);
     padding-left: 30px;
     color: white;
     align-self: center;
