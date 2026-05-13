@@ -20,6 +20,13 @@ export default function Chat({initialMessage}) {
     const inputRef = useRef(null);
     const errorTimerRef = useRef(null);
 
+    const cleanResponse = (text) => {
+        return text
+            .replace(/\s([ms])(?=\s|$)/g, "$1")
+            .replace(/\s('s|'t|'ve|'ll|'m|'d|'re)\b/g, "$1")
+            .replace(/\s+/g, " ")
+            .trim();
+    };
 
     const getResponse = (userMessage) => {
         fetch("https://mintels.pythonanywhere.com/chats/", {
@@ -33,7 +40,7 @@ export default function Chat({initialMessage}) {
             setTimeout(() => {
                 const remMessage = {
                     id: Date.now(),
-                    text: data.reply,
+                    text: cleanResponse(data.reply),
                     sender: "rem"
                 };
                 setMessages(prev => [...prev, remMessage]);
