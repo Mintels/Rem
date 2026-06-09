@@ -41,5 +41,24 @@
         height: 64px;
         padding-bottom: 0;
         transition: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footerContainer.sidebarClosed {
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footerText {
+        margin: 0;
+        padding: 0;
+    }
+
+    .footerIcon {
+        margin: 0;
+        padding: 0;
     }
 }

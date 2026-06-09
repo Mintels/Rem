@@ -6,6 +6,7 @@
     overflow: hidden;
     animation: FadeIn 0.7s ease-in-out forwards;
     background: linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(15, 15, 20, 0.5) 100%);
+    zoom: 1;
 }
 
 @keyframes FadeIn {
